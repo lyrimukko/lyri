@@ -1,0 +1,47 @@
+{
+  "name": "entry",
+  "description": "Open Markdown Pastebin",
+  "version": "1.1.9-rev-1",
+  "module": "src/index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/highlight.js": "^10.1.0",
+    "@types/marked": "^5.0.0",
+    "@types/mime-types": "^2.1.2",
+    "bun-types": "latest",
+    "prettier": "^3.0.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@codemirror/autocomplete": "latest",
+    "@codemirror/commands": "latest",
+    "@codemirror/lang-markdown": "latest",
+    "@codemirror/language": "latest",
+    "@codemirror/state": "latest",
+    "@codemirror/view": "latest",
+    "@lezer/highlight": "^1.1.6",
+    "highlight.js": "^11.8.0",
+    "honeybee": "https://git.sentrytwo.com/api/packages/hkau/npm/honeybee/-/1.0.8/honeybee-1.0.8.tgz",
+    "marked": "^5.1.0"
+  },
+  "scripts": {
+    "build": "bun run build.ts",
+    "build:no-clear": "DO_NOT_CLEAR_DIST=true bun run build",
+    "start": "bun run build && bun run start:no-build",
+    "start:no-build": "bun run dist/index.js",
+    "format": "prettier src/ --write --config ./.prettierrc",
+    "build:docker": "bun run build && docker buildx build --push --platform linux/amd64,linux/arm64 --tag git.sentrytwo.com/hkau/entry:latest .",
+    "build:docker-nopush": "bun run build && docker buildx build --load --tag git.sentrytwo.com/hkau/entry:latest .",
+    "start:docker-debug": "docker run  --env PORT=8080 --env NAME=Entry --env ADMIN_PASSWORD=ilald.l9klpkg91ksnpg1sfvdgnl1 -p 8080:8080 git.sentrytwo.com/hkau/entry:latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://codeberg.org/hkau/entry"
+  },
+  "bugs": {
+    "url": "https://codeberg.org/hkau/entry/issues"
+  },
+  "homepage": "www.lyri.ac"
+}
